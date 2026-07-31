@@ -273,7 +273,7 @@ const DeployNowWidget = () => {
         <Typography variant="beta" textAlign="center">
           {formatMessage({
             id: 'HomePage.widget.deploy-now.title',
-            defaultMessage: 'Ready to go live ?',
+            defaultMessage: 'Ready to go live?',
           })}
         </Typography>
         <Typography variant="omega" textColor="neutral600" textAlign="center">
