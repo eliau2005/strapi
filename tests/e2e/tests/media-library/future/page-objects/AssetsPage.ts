@@ -529,6 +529,28 @@ export class AssetsPage {
   /**
    * Upload files from URLs using the import from URL dialog
    */
+  async uploadFilesFromUrl(urls: string | string[]) {
+    await this.openImportFromUrlDialog();
+    const urlsArray = Array.isArray(urls) ? urls : [urls];
+    await this.urlTextarea.fill(urlsArray.join('\n'));
+    await this.importFromUrlDialog.getByRole('button', { name: 'Upload' }).click();
+  }
+
+  /**
+   * Cancel the whole in-flight upload batch from the progress dialog header.
+   */
+  async cancelUpload() {
+    await this.uploadProgressDialog.getByRole('button', { name: 'Cancel all' }).click();
+  }
+
+  /**
+   * Retry whichever files were left in a cancelled state after `cancelUpload()`.
+   * Only visible once at least one file is cancelled.
+   */
+  async retryCancelledUploads() {
+    await this.uploadProgressDialog.getByRole('button', { name: 'Retry' }).click();
+  }
+
   /**
    * Drag a file or folder onto a folder target using pointer events (dnd-kit).
    * Moves the pointer more than 8px before dropping to satisfy activation distance.
